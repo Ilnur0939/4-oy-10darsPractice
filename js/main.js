@@ -100,15 +100,15 @@ studentFilter.addEventListener('submit', function(evt){
         showingStudents = showingStudents.sort((a,b) => b.markedDate - a.markedDate)
     }    
     middleValueMark(showingStudents)
-    count.textContent = `count: ${showingStudents.length}`
+    countStudent(showingStudents)
     renderStudents() 
     
 })
 
-function countStudent(){
-    count.textContent = `count: ${students.length}`
+function countStudent(countTable){
+    count.textContent = `count: ${countTable.length}`
 }
-countStudent()
+
 const addForm = document.querySelector("#add-form");
 const addStudentModal = document.querySelector("#add-student-modal");
 const addStudentElModal = new bootstrap.Modal(addStudentModal)
@@ -136,8 +136,8 @@ addForm.addEventListener("submit", (e)=>{
     renderStudents();
     e.target.reset();
     addStudentElModal.hide();
-    middleValueMark(students)
-    countStudent()
+    middleValueMark(showingStudents)
+    countStudent(showingStudents)
 })
 
     
@@ -161,6 +161,8 @@ studentTable.addEventListener("click" , function(e){
         students.splice(studentDelIndex , 1)
         showingStudents.splice(studentDelIndex , 1)
         localStorage.setItem('students', JSON.stringify(students))
+        countStudent(showingStudents)
+        middleValueMark(showingStudents)
         renderStudents()
     }
     else if(e.target.matches(".btn-outline-secondary")){
@@ -172,9 +174,8 @@ studentTable.addEventListener("click" , function(e){
         editLastname.value = studentEditIndex.lastname 
         editMark.value = studentEditIndex.mark
         editForm.setAttribute("data-editing" , editing);
-
-        
     }
+
 });
 
 editForm.addEventListener("submit" , function(e){
@@ -203,7 +204,11 @@ editForm.addEventListener("submit" , function(e){
             return item.id === editingFormId
         })
         showingStudents.splice(showingStudentIndex , 1 , newStudent)
+        middleValueMark(showingStudents)
+        localStorage.setItem('students', JSON.stringify(students))
     }
     editStudentElModal.hide()
     renderStudents()
 })
+
+countStudent(showingStudents)
