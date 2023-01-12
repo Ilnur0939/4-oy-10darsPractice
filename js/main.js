@@ -101,7 +101,6 @@ studentFilter.addEventListener('submit', function(evt){
     else if(evt.target[3].value == 4){
         showingStudents = showingStudents.sort((a,b) => new Date(b.markedDate) - new Date(a.markedDate))
     }    
-    console.log(showingStudents[0].markedDate);
     middleValueMark(showingStudents)
     countStudent(showingStudents)
     renderStudents() 
