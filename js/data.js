@@ -2,7 +2,3 @@ const students = localStorage.getItem("students") ? JSON.parse(localStorage.getI
     
 ]
 
-// let arr = []
-// arr.push(localStorage.getItem("students"))
-
-// console.log(arr);
