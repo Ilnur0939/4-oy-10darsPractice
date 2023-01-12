@@ -86,7 +86,9 @@ studentFilter.addEventListener('submit', function(evt){
         const nameLastName = `${item.name} ${item.lastName}`
         return nameLastName.match(searchRegExp)
     })
-    showingStudents = showingStudents.filter(student => evt.target[1].value <= (student.mark * PERCENT / TOTAL_MARK) &&  evt.target[2].value >= (student.mark * PERCENT / TOTAL_MARK))
+    if(evt.target[1].value != "" && evt.target[2].value != ""){
+        showingStudents = showingStudents.filter(student => evt.target[1].value <= (student.mark * PERCENT / TOTAL_MARK) &&  evt.target[2].value >= (student.mark * PERCENT / TOTAL_MARK))
+    }
     if(evt.target[3].value == 1){
         showingStudents = showingStudents.sort((a,b) => a.name.localeCompare(b.name))
     }
